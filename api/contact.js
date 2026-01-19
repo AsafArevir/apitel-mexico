@@ -1,23 +1,28 @@
 import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
+
+    // CORS HEADERS
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    // Preflight
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
+
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const { name, email, phone, message } = req.body || {};
+    const { name, email, phone, message } = req.body;
 
-    if (!name || !message) {
+    // Validación backend
+    if (!name || !message || (!email && !phone)) {
         return res.status(400).json({
             success: false,
-            message: "Nombre y mensaje son obligatorios"
-        });
-    }
-
-    if (!email && !phone) {
-        return res.status(400).json({
-            success: false,
-            message: "Debes proporcionar correo o teléfono"
+            message: "Datos incompletos"
         });
     }
 
@@ -56,7 +61,7 @@ ${message}
         console.error(error);
         return res.status(500).json({
             success: false,
-            message: "Error al enviar el mensaje"
+            message: "Error interno"
         });
     }
 }
