@@ -63,15 +63,28 @@ function initHeader() {
   });
 }
 
+
 /**
- * Fix links when inside the /legal/ subfolder
+ * Fix relative links and images when inside subfolders (like /legal/)
  */
 function fixRelativeLinks(container) {
+  // 1. Arreglar Enlaces (a href) - Esto ya lo tenías
   const links = container.querySelectorAll("a");
   links.forEach(link => {
     const href = link.getAttribute("href");
-    if (href && !href.startsWith("http") && !href.startsWith("mailto") && !href.startsWith("/")) {
+    // Si no es absoluto, ni mailto, ni id, agregamos "../"
+    if (href && !href.startsWith("http") && !href.startsWith("mailto") && !href.startsWith("/") && !href.startsWith("#")) {
       link.setAttribute("href", "../" + href);
+    }
+  });
+
+  // 2. NUEVO: Arreglar Imágenes (img src) - Esto arregla el logo
+  const images = container.querySelectorAll("img");
+  images.forEach(img => {
+    const src = img.getAttribute("src");
+    // Si la ruta no empieza con http, / o data, le agregamos "../"
+    if (src && !src.startsWith("http") && !src.startsWith("/") && !src.startsWith("data:")) {
+      img.setAttribute("src", "../" + src);
     }
   });
 }

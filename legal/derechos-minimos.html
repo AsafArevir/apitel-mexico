@@ -2,52 +2,66 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Carta de Derechos Mínimos | MiISP</title>
+  <title>Carta de Derechos Mínimos | Apitel</title>
   <meta name="description" content="Carta de derechos mínimos de los usuarios del servicio de Internet conforme a la NOM-184-SCFI-2018.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Ajusta la ruta del CSS si es necesario -->
   <link rel="stylesheet" href="../css/styles.css">
 
   <style>
-    /* Contenedor principal para documentos */
-    .legal-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 2rem;
+    /* --- CORRECCIÓN VISUAL: MODO CLARO (Igual que Aviso de Privacidad) --- */
+
+    /* 1. Forzar fondo claro para esta página */
+    body {
+        background-color: #f4f6f8 !important;
+        color: #333333 !important;
+    }
+
+    /* 2. Contenedor tipo "Hoja de Papel" */
+    .legal-document {
         background: #ffffff;
+        padding: 3rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        max-width: 1000px;
+        margin: 2rem auto 5rem auto;
+        border: 1px solid #e2e8f0;
         min-height: 80vh;
     }
 
-    /* Encabezado con Título y Botón (Igual que en privacidad) */
+    /* 3. Header del Documento */
     .doc-header {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 2px solid var(--color-border, #e2e8f0);
+        border-bottom: 2px solid #eee;
         padding-bottom: 1.5rem;
         margin-bottom: 2rem;
-        gap: 1rem;
+        gap: 1.5rem;
     }
 
     .doc-header h1 {
         margin: 0;
-        font-size: 1.8rem;
-        color: var(--color-primary, #0b3c5d);
+        font-size: 2rem;
+        color: var(--color-blue); /* Azul corporativo */
+        line-height: 1.2;
     }
 
-    /* Botón de descarga */
+    /* 4. Botón de descarga */
     .btn-download {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        background-color: var(--color-secondary, #e91e63);
-        color: white;
-        padding: 0.6rem 1.2rem;
-        border-radius: 6px;
+        background-color: var(--color-pink);
+        color: white !important;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
         text-decoration: none;
         font-weight: 600;
         font-size: 0.9rem;
-        transition: background-color 0.3s, transform 0.2s;
+        transition: all 0.3s;
+        box-shadow: 0 4px 10px rgba(233, 30, 99, 0.3);
     }
 
     .btn-download:hover {
@@ -56,28 +70,39 @@
         color: white;
     }
 
-    /* Visor de PDF */
-    .pdf-viewer {
-        width: 100%;
-        height: 800px; /* Altura fija considerable para lectura cómoda */
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    /* 5. Texto descriptivo */
+    .legal-intro {
+        margin-bottom: 2rem;
+        color: #555;
+        font-size: 1.05rem;
+        line-height: 1.6;
     }
 
-    /* Mensaje de fallback por si el navegador no soporta PDF */
+    /* 6. Visor de PDF Estilizado */
+    .pdf-viewer {
+        width: 100%;
+        height: 800px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
+        background-color: #f9f9f9;
+    }
+
+    /* Mensaje por si falla el PDF */
     .pdf-fallback {
         text-align: center;
-        padding: 2rem;
+        padding: 4rem 2rem;
         background-color: #f8fafc;
-        border: 1px dashed #cbd5e1;
+        border: 2px dashed #cbd5e1;
         border-radius: 8px;
+        color: #666;
     }
 
     @media (max-width: 768px) {
-        .legal-container { padding: 1rem; }
+        .legal-document { padding: 1.5rem; margin: 1rem; }
         .doc-header { flex-direction: column; align-items: flex-start; }
-        .pdf-viewer { height: 500px; } /* Altura ajustada para móviles */
+        .btn-download { width: 100%; justify-content: center; }
+        .pdf-viewer { height: 500px; }
     }
   </style>
 </head>
@@ -87,14 +112,13 @@
 <div id="header"></div>
 
 <main>
-  <section class="legal-container">
+  <section class="legal-document">
     
-    <!-- Encabezado -->
+    <!-- Encabezado con título y botón -->
     <div class="doc-header">
         <h1>Carta de Derechos Mínimos</h1>
         
         <!-- Botón de descarga -->
-        <!-- Asegúrate de que el nombre del archivo coincida con el que subiste -->
         <a href="carta_min_der.pdf" download="Carta_Derechos_Minimos.pdf" class="btn-download">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -105,12 +129,12 @@
         </a>
     </div>
 
-    <p style="margin-bottom: 2rem; color: #555;">
-      En cumplimiento con la <strong>NOM-184-SCFI-2018</strong>, ponemos a su disposición la Carta de Derechos Mínimos de los Usuarios de Servicios Públicos de Telecomunicaciones. Puede leerla a continuación o descargarla para su consulta posterior.
+    <p class="legal-intro">
+      En cumplimiento con la <strong>NOM-184-SCFI-2018</strong>, Apitel pone a su disposición la Carta de Derechos Mínimos de los Usuarios de Servicios Públicos de Telecomunicaciones. Puede visualizar el documento a continuación o descargarlo para su consulta posterior.
     </p>
 
     <!-- VISOR DE PDF -->
-    <!-- data: Ruta al archivo PDF -->
+    <!-- Asegúrate de que el archivo 'carta_min_der.pdf' esté en la misma carpeta o ajusta la ruta -->
     <object 
         data="carta_min_der.pdf" 
         type="application/pdf" 
@@ -119,9 +143,9 @@
     >
         <!-- Contenido alternativo si el navegador no soporta la visualización -->
         <div class="pdf-fallback">
-            <p>Tu navegador no puede visualizar el PDF directamente.</p>
+            <p style="margin-bottom: 1.5rem;">Tu navegador no puede visualizar el PDF directamente.</p>
             <a href="carta_min_der.pdf" class="btn-download">
-                Haz clic aquí para descargarlo
+                Haz clic aquí para descargar el archivo
             </a>
         </div>
     </object>
