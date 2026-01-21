@@ -7,8 +7,6 @@
     <meta name="description" content="Conoce nuestra misión, visión y valores. Conectamos personas.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="css/logo.png">
 
     <style>
         /* --- ESTILOS ESPECÍFICOS PARA ABOUT --- */
@@ -16,16 +14,13 @@
         /* 1. OVERRIDE (Anular) el fondo negro del Global CSS */
         body {
             background-color: #f8fafc !important;
-            /* Fondo Gris muy claro/Blanco */
             color: #333333 !important;
-            /* Texto oscuro */
         }
 
         /* 2. HERO ESPECÍFICO */
         .about-hero {
             background: linear-gradient(135deg, var(--color-blue-dark) 0%, var(--color-blue) 100%);
             padding: 8rem 1.5rem 10rem 1.5rem;
-            /* Más espacio abajo para el efecto flotante */
             text-align: center;
             color: white;
             clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
@@ -45,10 +40,9 @@
             font-size: 1.2rem;
         }
 
-        /* 3. CONTENEDOR DE MISIÓN/VISIÓN (Efecto Flotante) */
+        /* 3. MISIÓN/VISIÓN */
         .mv-wrapper {
             margin-top: -8rem;
-            /* Sube sobre el hero */
             position: relative;
             z-index: 10;
             margin-bottom: 5rem;
@@ -68,7 +62,6 @@
             padding: 3rem 2rem;
             border-radius: 12px;
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-            /* Sombra suave */
             text-align: center;
             transition: transform 0.3s ease;
             border-top: 5px solid transparent;
@@ -108,9 +101,8 @@
             color: var(--color-blue);
         }
 
-        /* 4. SECCIÓN FULL WIDTH CON IMAGEN */
+        /* 4. SECCIÓN FULL WIDTH */
         .about-bg-section {
-            /* Asegúrate de que la ruta de la imagen sea correcta */
             background-image: url('css/img11.jpeg');
             background-size: cover;
             background-position: center;
@@ -150,7 +142,9 @@
             opacity: 0.95;
         }
 
-        /* 5. VALORES */
+        /* =========================================
+       5. VALORES CON EFECTO FLIP (TARJETA GIRATORIA)
+       ========================================= */
         .values-container {
             text-align: center;
             padding-bottom: 6rem;
@@ -171,37 +165,94 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 2rem;
+            gap: 1.5rem;
         }
 
-        .value-box {
-            background: white;
-            border: 1px solid #eee;
-            padding: 2.5rem 1.5rem;
-            border-radius: 12px;
-            width: 200px;
-            transition: all 0.3s;
+        /* Contenedor de la escena 3D */
+        .flip-box {
+            background-color: transparent;
+            width: 220px;
+            height: 240px;
+            perspective: 1000px;
+            /* Profundidad 3D */
+        }
+
+        /* Contenedor interior que se mueve */
+        .flip-box-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Rebote suave */
+            transform-style: preserve-3d;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
         }
 
-        .value-box:hover {
-            border-color: var(--color-pink);
-            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.15);
-            transform: translateY(-5px);
+        /* Acción al pasar el mouse: Girar */
+        .flip-box:hover .flip-box-inner {
+            transform: rotateY(180deg);
+            box-shadow: 0 15px 30px rgba(233, 30, 99, 0.3);
+            /* Sombra rosa al girar */
+        }
+
+        /* Caras de la tarjeta (Frente y Atras) */
+        .flip-box-front,
+        .flip-box-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+        }
+
+        /* Estilo Frente (Blanco) */
+        .flip-box-front {
+            background-color: white;
+            color: var(--color-text-main);
+            border: 1px solid #eee;
+        }
+
+        /* Estilo Atrás (Color o Gradiente) */
+        .flip-box-back {
+            background: linear-gradient(135deg, var(--color-blue), var(--color-blue-dark));
+            color: white;
+            transform: rotateY(180deg);
+            /* Ya está girada para esperar el flip */
+            border: 2px solid var(--color-pink);
+            /* Borde rosa para resaltar */
         }
 
         .value-icon {
             color: var(--color-pink);
             margin-bottom: 1rem;
+            transition: transform 0.3s;
         }
 
-        .value-box h3 {
-            font-size: 1.1rem;
-            color: var(--color-blue);
+        .flip-box:hover .value-icon {
+            transform: scale(1.2);
+        }
+
+        .flip-box h3 {
+            font-size: 1.2rem;
             margin: 0;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-weight: 700;
+        }
+
+        /* Texto de atrás */
+        .flip-box-back p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0;
+            font-style: italic;
         }
     </style>
 </head>
@@ -221,11 +272,10 @@
             </p>
         </section>
 
-        <!-- MISIÓN Y VISIÓN (FLOTANTES) -->
+        <!-- MISIÓN Y VISIÓN -->
         <div class="mv-wrapper">
             <div class="mv-grid">
-
-                <!-- Card Misión -->
+                <!-- Misión -->
                 <article class="mv-card mission">
                     <div class="mv-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -241,14 +291,11 @@
                         </svg>
                     </div>
                     <h2>Misión</h2>
-                    <p>
-                        Brindar servicios de internet confiables, rápidos y seguros, ofreciendo soluciones tecnológicas
+                    <p>Brindar servicios de internet confiables, rápidos y seguros, ofreciendo soluciones tecnológicas
                         de alta calidad que permitan a nuestros clientes comunicarse, trabajar y crecer en un entorno
-                        digital eficiente.
-                    </p>
+                        digital eficiente.</p>
                 </article>
-
-                <!-- Card Visión -->
+                <!-- Visión -->
                 <article class="mv-card vision">
                     <div class="mv-icon">
                         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -258,92 +305,131 @@
                         </svg>
                     </div>
                     <h2>Visión</h2>
-                    <p>
-                        Ser la empresa líder en servicios de internet en nuestra región, reconocida por la innovación,
-                        la excelencia en el servicio y la satisfacción de nuestros clientes.
-                    </p>
+                    <p>Ser la empresa líder en servicios de internet en nuestra región, reconocida por la innovación, la
+                        excelencia en el servicio y la satisfacción de nuestros clientes.</p>
                 </article>
-
             </div>
         </div>
 
-        <!-- SECCIÓN FULL WIDTH (COMPROMISO) -->
+        <!-- SECCIÓN FULL WIDTH -->
         <section class="about-bg-section">
             <div class="about-overlay"></div>
             <div class="about-quote">
                 <h2>Impulsando el futuro</h2>
-                <p>
-                    "Creemos que una conexión estable es la base de la productividad moderna.
-                    Por eso invertimos en la mejor infraestructura para ti."
-                </p>
+                <p>"Creemos que una conexión estable es la base de la productividad moderna. Por eso invertimos en la
+                    mejor infraestructura para ti."</p>
             </div>
         </section>
 
-        <!-- VALORES -->
-        <section class="container values-container">
+        <!-- VALORES (FLIP CARDS) -->
+        <section class="container-full values-container">
             <h2>Nuestros Valores</h2>
             <p>Los pilares que sostienen cada conexión que realizamos.</p>
 
             <div class="values-grid">
-                <!-- Respeto -->
-                <div class="value-box">
-                    <div class="value-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
+
+                <!-- 1. Respeto -->
+                <div class="flip-box" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-box-inner">
+                        <!-- Frente -->
+                        <div class="flip-box-front">
+                            <div class="value-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <h3>Respeto</h3>
+                        </div>
+                        <!-- Atrás (Frase) -->
+                        <div class="flip-box-back">
+                            <p>"Valoramos a cada persona y sus ideas, creando un ambiente de armonía y confianza mutua."
+                            </p>
+                        </div>
                     </div>
-                    <h3>Respeto</h3>
                 </div>
 
-                <!-- Honestidad -->
-                <div class="value-box">
-                    <div class="value-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path
-                                d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
-                            </path>
-                        </svg>
+                <!-- 2. Honestidad -->
+                <div class="flip-box" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <div class="value-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h3>Honestidad</h3>
+                        </div>
+                        <div class="flip-box-back">
+                            <p>"Actuamos con total transparencia, veracidad y rectitud en cada conexión que
+                                establecemos."</p>
+                        </div>
                     </div>
-                    <h3>Honestidad</h3>
                 </div>
 
-                <!-- Lealtad -->
-                <div class="value-box">
-                    <div class="value-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
+                <!-- 3. Lealtad -->
+                <div class="flip-box" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <div class="value-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                </svg>
+                            </div>
+                            <h3>Lealtad</h3>
+                        </div>
+                        <div class="flip-box-back">
+                            <p>"Somos fieles a nuestros clientes y a nuestra promesa de entregar siempre la mejor
+                                calidad."</p>
+                        </div>
                     </div>
-                    <h3>Lealtad</h3>
                 </div>
 
-                <!-- Eficiencia -->
-                <div class="value-box">
-                    <div class="value-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                        </svg>
+                <!-- 4. Eficiencia -->
+                <div class="flip-box" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <div class="value-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                </svg>
+                            </div>
+                            <h3>Eficiencia</h3>
+                        </div>
+                        <div class="flip-box-back">
+                            <p>"Optimizamos recursos y tiempo para brindarte soluciones rápidas y efectivas en todo
+                                momento."</p>
+                        </div>
                     </div>
-                    <h3>Eficiencia</h3>
                 </div>
 
-                <!-- Compromiso -->
-                <div class="value-box">
-                    <div class="value-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="5" r="3"></circle>
-                            <line x1="12" y1="22" x2="12" y2="8"></line>
-                            <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
-                        </svg>
+                <!-- 5. Compromiso -->
+                <div class="flip-box" ontouchstart="this.classList.toggle('hover');">
+                    <div class="flip-box-inner">
+                        <div class="flip-box-front">
+                            <div class="value-icon">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="5" r="3"></circle>
+                                    <line x1="12" y1="22" x2="12" y2="8"></line>
+                                    <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
+                                </svg>
+                            </div>
+                            <h3>Compromiso</h3>
+                        </div>
+                        <div class="flip-box-back">
+                            <p>"Estamos dedicados al 100% a mantenerte conectado, superando tus expectativas día a día."
+                            </p>
+                        </div>
                     </div>
-                    <h3>Compromiso</h3>
                 </div>
+
             </div>
         </section>
 
@@ -353,7 +439,8 @@
     <div class="floating-socials" id="floatingSocials">
 
         <!-- Facebook (Logo Oficial 'f') -->
-        <a href="https://www.facebook.com/share/17xBgd9EsV/?mibextid=wwXIfr" target="_blank" class="float-btn fb-btn" aria-label="Facebook">
+        <a href="https://www.facebook.com/share/17xBgd9EsV/?mibextid=wwXIfr" target="_blank" class="float-btn fb-btn"
+            aria-label="Facebook">
             <svg width="40" height="40" viewBox="0 0 24 24" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
                 <path
                     d="M14 13.5H16.5L17.5 9.5H14V7.5C14 6.47062 14 5.5 16 5.5H17.5V2.1401C17.1743 2.09685 15.943 2 14.643 2C11.928 2 10 3.657 10 6.7V9.5H7V13.5H10V22H14V13.5Z" />

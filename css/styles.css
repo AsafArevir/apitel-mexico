@@ -210,6 +210,12 @@ section {
   padding: 0 1.5rem;
 }
 
+.container-full {
+  max-width: 100%;
+  margin: 0;
+  padding: 0 1.5rem;
+}
+
 /* Color Blocks */
 .bg-white {
   background-color: var(--color-white);
