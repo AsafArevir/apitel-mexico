@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Indica la ubicación del sitemap 
+Sitemap: https://www.apitelmx.com/sitemap.xml
