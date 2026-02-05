@@ -1,3 +1,9 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/general-7", "destination": "/plans", "permanent": true },
+    { "source": "/servicio-residencial", "destination": "/services", "permanent": true },
+    { "source": "/general-6", "destination": "/services", "permanent": true },
+    { "source": "/conociendo-apitelméxico", "destination": "/about", "permanent": true }
+  ]
 }
